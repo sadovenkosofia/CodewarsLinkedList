@@ -1,0 +1,38 @@
+"""
+Module for working with a singly linked list.
+
+Contains the definition of a basic list node (Node) and a function to insert
+a new element into a sorted list while maintaining ascending order.
+"""
+# For your information:
+# class Node(object):
+#     def __init__(self, data):
+#         self.data = data
+#         self.next = None
+
+
+def sorted_insert(head, data):
+    """
+    Inserts a new node with the given value into a sorted linked list.
+    """
+    if head is None:
+        return Node(data)
+
+    if head.data > data:
+        curr = head
+        head = Node(data)
+        head.next = curr
+        return head
+
+    curr = head.next
+    prev_value = head
+    while curr is not None:
+        if curr.data > data:
+            prev_value.next = Node(data)
+            prev_value = prev_value.next
+            prev_value.next = curr
+            return head
+        curr = curr.next
+        prev_value = prev_value.next
+    prev_value.next = Node(data)
+    return head
