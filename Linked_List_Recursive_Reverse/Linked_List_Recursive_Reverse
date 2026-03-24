@@ -1,0 +1,21 @@
+"""
+Module for working with and manipulating singly linked lists.
+
+This module provides the core Node class for building a linked list
+and a function to reverse it in place using recursion.
+"""
+# class Node(object):
+#     def __init__(self, data=None):
+#         self.data = data
+#         self.next = None
+
+def reverse(head):
+    """
+    Reverses a singly linked list using recursion.
+    """
+    if head is None or head.next is None:
+        return head
+    reverse_node = reverse(head.next)
+    head.next.next = head
+    head.next = None
+    return reverse_node
