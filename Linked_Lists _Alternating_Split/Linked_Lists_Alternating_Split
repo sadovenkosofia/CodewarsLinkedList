@@ -1,0 +1,48 @@
+"""
+Splits a linked list into two sublists with alternating nodes.
+"""
+class Node(object):
+    """Represents a single node in a linked list."""
+    def __init__(self, data=None):
+        self.data = data
+        self.next = None
+
+class Context(object):
+    """Container to return two lists resulting from a split."""
+    def __init__(self, first, second):
+        self.first = first
+        self.second = second
+
+def alternating_split(head):
+    """
+    Splits a linked list into two sublists with alternating nodes.
+    """
+    first = None
+    second = None
+    first_head = None
+    second_head = None
+    i = 0
+    if not head or not head.next:
+        raise ValueError
+    while head:
+        if i % 2 == 0:
+            if first:
+                first.next = head
+                first = first.next
+            else:
+                first = head
+                first_head = first
+        else:
+            if second:
+                second.next = head
+                second = second.next
+            else:
+                second = head
+                second_head = second
+        head = head.next
+        i += 1
+    if first:
+        first.next = None
+    if second:
+        second.next = None
+    return Context(first_head, second_head)
