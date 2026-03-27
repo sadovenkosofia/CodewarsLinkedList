@@ -1,0 +1,25 @@
+"""
+Determines the number of nodes in a linked list's loop.
+"""
+def loop_size(node):
+    """
+    Determines the number of nodes in a linked list's loop.
+    """
+    fast = node.next
+    slow = node
+
+    while fast:
+        if fast == slow:
+            head_loop = fast
+            break
+        fast = fast.next.next
+        slow = slow.next
+    i = 1
+    curr = head_loop.next
+    while curr:
+        i += 1
+        curr = curr.next
+        if curr == head_loop:
+            break
+
+    return i
